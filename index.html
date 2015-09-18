@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="application">
+  <head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+
+  <body>
+    <div class="jumbotron banner" ng-controller="addtask">
+        <h1>To-Do Application</h1>
+        <p>Simple to-do application by AngularJS + Bootstrap</p>
+        <button type="button" class="btn btn-primary" ng-click="toggle()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add List</button>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Angular JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script>
+      var app = angular.module('application', []);
+      application.controller('addtask', function($scope) {
+        
+      });
+    </script>
+  </body>
+</html>
