@@ -9,10 +9,29 @@
   </head>
 
   <body>
-    <div class="jumbotron banner" ng-controller="addtask">
+    <!-- Modal -->
+    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="add-task-modal-label" ng-controller="addtask">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add new list</h4>
+          </div>
+          <div class="modal-body">
+            Name:<input type="text" ng-model="listName"><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-controller="" >OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jumbotron banner">
         <h1>To-Do Application</h1>
         <p>Simple to-do application by AngularJS + Bootstrap</p>
-        <button type="button" class="btn btn-primary" ng-click="toggle()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add List</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-task-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add List</button>
     </div>
 
 
@@ -21,10 +40,13 @@
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script>
+      var list = [];
       var app = angular.module('application', []);
-      application.controller('addtask', function($scope) {
-        
+      app.controller('addTask', function($scope) {
+        list.push($scope.listName);
+        console.log(list);
       });
+      app.controller('')
     </script>
   </body>
 </html>
