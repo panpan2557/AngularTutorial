@@ -64,7 +64,7 @@
             {{task.name}}
           </button>
           <ul class="dropdown-menu task-dropdown">
-            <li><a href="#" ng-click="deleteTask(task.name)">Achieve</a></li>
+            <li><a href="#" ng-click="deleteTask(task.index, tab)">Achieve</a></li>
             <li><a href="#">Move</a></li>
           </ul>
         </div>
@@ -80,20 +80,16 @@
       app.controller('main', function($scope) {
         $scope.tasks = [];
         $scope.tabs = [{name:"Default", tasks:[]}];
+        var taski = 0;
         $scope.addNewTask = function() {
-          pushToDefaultTab({name:$scope.listName});
+          pushToDefaultTab({name:$scope.listName, index:taski++});
           //clear the input text
           $scope.listName = '';
         };
-        $scope.deleteTask = function(name) {
-          console.log(i);
+        $scope.deleteTask = function(index, tab) {
           var i;
-          for (i = 0 ; i < $scope.tasks.length ; i++) {
-            if ($scope.tasks[i].name == name) {
-              $scope.tasks.splice(i, 1);
-              break;
-            }
-          }
+          tab.tasks.splice(index, 1);
+          // reindex();
         }
         $scope.addNewTab = function() {
 
