@@ -8,32 +8,69 @@
     <link rel="stylesheet" href="css/index.css">
   </head>
 
-  <body>
+  <body ng-controller="main">
     <!-- Modal -->
-    <div ng-controller="addTask">
-      <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="add-task-modal-label">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Add new task</h4>
-            </div>
-            <div class="modal-body">
-              Name:&nbsp<input type="text" ng-model="listName"><br>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewTask()" >OK</button>
-            </div>
+    <div class="modal fade" id="add-task-modal" tabindex="-1" role="dialog" aria-labelledby="add-task-modal-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add new task</h4>
+          </div>
+          <div class="modal-body">
+            Name:&nbsp<input type="text" autofocus ng-model="listName"><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewTask()" >OK</button>
           </div>
         </div>
       </div>
-  </div>
+    </div>
+
+    <div class="modal fade" id="add-tab-modal" tabindex="-1" role="dialog" aria-labelledby="add-tab-modal-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add new tab</h4>
+          </div>
+          <div class="modal-body">
+            Name:&nbsp<input type="text" autofocus ng-model="tabName"><br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewTab()" >OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <div class="jumbotron banner">
         <h1>To-Do Application</h1>
         <p>Simple to-do application by AngularJS + Bootstrap</p>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-task-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New Task</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-tab-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New Tab</button>
+    </div>
+
+    <div class="panel panel-default" ng-repeat="">
+      <div class="panel-heading">
+        <h3 class="panel-title">Panel title</h3>
+      </div>
+      <div class="panel-body">
+        Panel content
+      </div>
+    </div>
+
+    <div class="btn-group task" ng-repeat="task in tasks">
+      <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{task.name}}
+      </button>
+      <ul class="dropdown-menu task-dropdown">
+        <li><a href="#" ng-click="deleteTask(task.name)">Achieve</a></li>
+        <li><a href="#">Move</a></li>
+      </ul>
     </div>
 
 
@@ -42,14 +79,28 @@
     <!-- Angular JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script>
-      var tasks = [];
       var app = angular.module('application', []);
-      app.controller('addTask', function($scope) {
+      app.controller('main', function($scope) {
+        $scope.tasks = [];
+        $scope.tabs = [];
         $scope.addNewTask = function() {
-          tasks.push({name:$scope.listName, status:false});
+          $scope.tasks.push({name:$scope.listName});
+          $scope.listName = '';
+        };
+        $scope.deleteTask = function(name) {
+          console.log(i);
+          var i;
+          for (i = 0 ; i < $scope.tasks.length ; i++) {
+            if ($scope.tasks[i].name == name) {
+              $scope.tasks.splice(i, 1);
+              break;
+            }
+          }
+        }
+        $scope.addNewTab = function() {
+
         };
       });
-      app.controller('')
     </script>
   </body>
 </html>
