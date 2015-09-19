@@ -22,7 +22,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewTask()" >OK</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addNewTask(tabs[0])" >OK</button>
           </div>
         </div>
       </div>
@@ -64,8 +64,10 @@
             {{task.name}}
           </button>
           <ul class="dropdown-menu task-dropdown">
-            <li><a href="#" ng-click="deleteTask(task.index, tab)">Achieve</a></li>
-            <li><a href="#">Move</a></li>
+            <li><a href="#" ng-click="deleteTask(task, tab)">Achieve</a></li>
+            <li role="separator" class="divider"></li>
+            <li class="dropdown-header">Move to</li>
+            <li ng-repeat="otab in tabs | filter: {name: '!' + tab.name}"><a href="#" ng-click="moveTo(otab, tab, task)">{{otab.name}}</a></li>
           </ul>
         </div>
       </div>
@@ -78,12 +80,9 @@
     <script>
       var app = angular.module('application', []);
       app.controller('main', function($scope) {
-        $scope.tasks = [];
-        $scope.tabs = [{name:"Default", tasks:[]}];
-        var taski = 0;
-        var tabi = 0;
-        $scope.addNewTask = function() {
-          pushToDefaultTab({name:$scope.taskName, index:taski++});
+        $scope.tabs = [{name:"Default", tasks:[{name: 'ChinCluBi'}], }, {name: 'Atab', tasks:[{name: 'Xtask'}]}];
+        $scope.addNewTask = function(tab) {
+          tab.tasks.push({name:$scope.taskName});
           //clear the input text
           $scope.listName = '';
         };
@@ -92,27 +91,13 @@
           //clear the input text
           $scope.tabName = '';
         };
-        $scope.deleteTask = function(index, tab) {
-          var i;
+        $scope.deleteTask = function(task, tab) {
+          var index = tab.tasks.indexOf(task);
           tab.tasks.splice(index, 1);
-          reindex(tab);
         }
-        var pushToDefaultTab = function(task) {
-          var i;
-          for (i = 0 ; i < $scope.tabs.length ; i++) {
-            if ($scope.tabs[i].name == "Default") {
-              $scope.tabs[i].tasks.push(task);
-              break;
-            }
-          }
-        }
-        var reindex = function(tab) {
-          var i;
-          for (i = 0 ; i < tab.tasks.length ; i++) {
-            if (i != tab.tasks[i].index) {
-              tab.tasks[i].index = i;
-            }
-          }
+        $scope.moveTo = function(otab, tab, task) {
+          $scope.deleteTask(task, tab);
+          otab.tasks.push(task);
         }
       });
     </script>
