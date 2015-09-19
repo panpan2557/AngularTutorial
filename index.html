@@ -82,7 +82,7 @@
       var app = angular.module('application', []);
       app.controller('main', function($scope) {
         $scope.tasks = [];
-        $scope.tabs = [];
+        $scope.tabs = [{name:"Default", tasks:[]}];
         $scope.addNewTask = function() {
           $scope.tasks.push({name:$scope.listName});
           $scope.listName = '';
