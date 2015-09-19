@@ -46,7 +46,6 @@
       </div>
     </div>
 
-
     <div class="jumbotron banner">
         <h1>To-Do Application</h1>
         <p>Simple to-do application by AngularJS + Bootstrap</p>
@@ -80,7 +79,7 @@
     <script>
       var app = angular.module('application', []);
       app.controller('main', function($scope) {
-        $scope.tabs = [{name:"Default", tasks:[{name: 'ChinCluBi'}], }, {name: 'Atab', tasks:[{name: 'Xtask'}]}];
+        $scope.tabs = [{name:"Default", tasks:[{name: 'Have Meeting'}], }, {name: 'Work', tasks:[{name: 'Do TSP Document'}]}];
         $scope.addNewTask = function(tab) {
           tab.tasks.push({name:$scope.taskName});
           //clear the input text
