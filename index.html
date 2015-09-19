@@ -89,7 +89,7 @@
         $scope.deleteTask = function(index, tab) {
           var i;
           tab.tasks.splice(index, 1);
-          // reindex();
+          reindex(tab);
         }
         $scope.addNewTab = function() {
 
@@ -100,6 +100,14 @@
             if ($scope.tabs[i].name == "Default") {
               $scope.tabs[i].tasks.push(task);
               break;
+            }
+          }
+        }
+        var reindex = function(tab) {
+          var i;
+          for (i = 0 ; i < tab.tasks.length ; i++) {
+            if (i != tab.tasks[i].index) {
+              tab.tasks[i].index = i;
             }
           }
         }
