@@ -2,6 +2,11 @@
   padding-left: 10%;
 }
 .task {
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.tab {
   margin-left: 10%;
-  margin-bottom: 40px;
+  margin-right: 10%;
+  margin-bottom: 10%;
 }

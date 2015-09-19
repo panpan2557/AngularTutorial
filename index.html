@@ -54,25 +54,22 @@
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add-tab-modal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add New Tab</button>
     </div>
 
-    <div class="panel panel-default" ng-repeat="">
+    <div class="panel panel-default tab" ng-repeat="tab in tabs">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title</h3>
+        <h3 class="panel-title">{{tab.name}}</h3>
       </div>
       <div class="panel-body">
-        Panel content
+        <div class="btn-group task" ng-repeat="task in tab.tasks">
+          <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{task.name}}
+          </button>
+          <ul class="dropdown-menu task-dropdown">
+            <li><a href="#" ng-click="deleteTask(task.name)">Achieve</a></li>
+            <li><a href="#">Move</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="btn-group task" ng-repeat="task in tasks">
-      <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{task.name}}
-      </button>
-      <ul class="dropdown-menu task-dropdown">
-        <li><a href="#" ng-click="deleteTask(task.name)">Achieve</a></li>
-        <li><a href="#">Move</a></li>
-      </ul>
-    </div>
-
 
     <!-- Bootstrap JS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -84,7 +81,8 @@
         $scope.tasks = [];
         $scope.tabs = [{name:"Default", tasks:[]}];
         $scope.addNewTask = function() {
-          $scope.tasks.push({name:$scope.listName});
+          pushToDefaultTab({name:$scope.listName});
+          //clear the input text
           $scope.listName = '';
         };
         $scope.deleteTask = function(name) {
@@ -100,6 +98,15 @@
         $scope.addNewTab = function() {
 
         };
+        var pushToDefaultTab = function(task) {
+          var i;
+          for (i = 0 ; i < $scope.tabs.length ; i++) {
+            if ($scope.tabs[i].name == "Default") {
+              $scope.tabs[i].tasks.push(task);
+              break;
+            }
+          }
+        }
       });
     </script>
   </body>
