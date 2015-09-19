@@ -79,6 +79,7 @@
     <script>
       var app = angular.module('application', []);
       app.controller('main', function($scope) {
+        //Mock the tabs and task
         $scope.tabs = [{name:"Default", tasks:[{name: 'Have Meeting'}], }, {name: 'Work', tasks:[{name: 'Do TSP Document'}]}];
         $scope.addNewTask = function(tab) {
           tab.tasks.push({name:$scope.taskName});
