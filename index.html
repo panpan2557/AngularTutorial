@@ -18,7 +18,7 @@
             <h4 class="modal-title" id="myModalLabel">Add new task</h4>
           </div>
           <div class="modal-body">
-            Name:&nbsp<input type="text" autofocus ng-model="listName"><br>
+            Name:&nbsp<input type="text" autofocus ng-model="taskName"><br>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -81,19 +81,22 @@
         $scope.tasks = [];
         $scope.tabs = [{name:"Default", tasks:[]}];
         var taski = 0;
+        var tabi = 0;
         $scope.addNewTask = function() {
-          pushToDefaultTab({name:$scope.listName, index:taski++});
+          pushToDefaultTab({name:$scope.taskName, index:taski++});
           //clear the input text
           $scope.listName = '';
+        };
+        $scope.addNewTab = function() {
+          $scope.tabs.push({name:$scope.tabName, task:[]});
+          //clear the input text
+          $scope.tabName = '';
         };
         $scope.deleteTask = function(index, tab) {
           var i;
           tab.tasks.splice(index, 1);
           reindex(tab);
         }
-        $scope.addNewTab = function() {
-
-        };
         var pushToDefaultTab = function(task) {
           var i;
           for (i = 0 ; i < $scope.tabs.length ; i++) {
