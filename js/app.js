@@ -8,7 +8,7 @@ app.controller('main', function($scope) {
     $scope.listName = '';
   };
   $scope.addNewTab = function() {
-    $scope.tabs.push({name:$scope.tabName, task:[]});
+    $scope.tabs.push({name:$scope.tabName, tasks:[]});
     //clear the input text
     $scope.tabName = '';
   };
